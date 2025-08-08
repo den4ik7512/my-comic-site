@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Stickmania Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #121212;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        header {
+            background: #1f1f1f;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5em;
+            border-bottom: 2px solid #333;
+        }
+        #messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        .msg {
+            background: #1e1e1e;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 70%;
+        }
+        .msg img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        #admin-panel {
+            display: none;
+            padding: 10px;
+            background: #1f1f1f;
+            border-top: 2px solid #333;
+        }
+        input, button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+        input {
+            flex: 1;
+        }
+        button {
+            background: #4cafef;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #3a8fd0;
+        }
+        #code-section {
+            padding: 10px;
+            background: #1f1f1f;
+            border-top: 2px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <header>💬 Stickmania Chat</header>
+
+    <div id="messages"></div>
+
+    <div id="code-section">
+        <input type="password" id="code" placeholder="Введите секретный код">
+        <button onclick="checkCode()">Войти</button>
+    </div>
+
+    <div id="admin-panel">
+        <input type="text" id="messageInput" placeholder="Введите сообщение">
+        <input type="file" id="imageInput">
+        <button onclick="sendMessage()">Отправить</button>
+    </div>
+
+    <script>
+        let admin = false;
+
+        function checkCode() {
+            const code = document.getElementById("code").value;
+            if (code === "556655") {
+                admin = true;
+                document.getElementById("admin-panel").style.display = "flex";
+                document.getElementById("code-section").style.display = "none";
+                alert("Вы вошли как админ!");
+            } else {
+                alert("Неверный код!");
+            }
+        }
+
+        function sendMessage() {
+            if (!admin) return;
+
+            const messagesDiv = document.getElementById("messages");
+            const text = document.getElementById("messageInput").value;
+            const image = document.getElementById("imageInput").files[0];
+
+            const msgDiv = document.createElement("div");
+            msgDiv.className = "msg";
+
+            if (text.trim() !== "") {
+                msgDiv.innerHTML += `<p>${text}</p>`;
+            }
+
+            if (image) {
+                const imgElement = document.createElement("img");
+                imgElement.src = URL.createObjectURL(image);
+                msgDiv.appendChild(imgElement);
+            }
+
+            messagesDiv.appendChild(msgDiv);
+
+            document.getElementById("messageInput").value = "";
+            document.getElementById("imageInput").value = "";
+        }
+    </script>
+</body>
+</html>
