@@ -1,0 +1,68 @@
+/* static/style.css */
+*{box-sizing:border-box}
+body {
+    font-family: Arial, sans-serif;
+    background: #121212;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+header {
+    background: #1f1f1f;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.5em;
+    border-bottom: 2px solid #333;
+}
+#messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column-reverse; /* show newest on top visually */
+    gap: 10px;
+}
+.msg {
+    background: #1e1e1e;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 70%;
+    word-break: break-word;
+}
+.msg img {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-top: 8px;
+}
+.panel {
+    padding: 10px;
+    background: #1f1f1f;
+    border-top: 2px solid #333;
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+.panel input[type="text"], .panel input[type="password"] {
+    padding:10px;
+    border-radius:5px;
+    border:none;
+    flex:1;
+}
+.panel input[type="file"] {
+    background: transparent;
+    color:inherit;
+}
+button {
+    padding:10px 14px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    background:#4cafef;
+    color:white;
+}
+button:hover{opacity:0.95}
+.small {font-size:0.9em; opacity:0.9;}
+.footer-note {padding:8px; text-align:center; font-size:0.9em; opacity:0.7;}
